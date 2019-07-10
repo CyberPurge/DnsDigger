@@ -1,0 +1,2 @@
+# DnsDigger
+Zone transfer scanner
