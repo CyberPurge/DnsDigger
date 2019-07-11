@@ -3,7 +3,7 @@ import argparse
 import sys
 import time
 start = time.time()
-time_out = 2 # you can modify the timeout here
+time_out = 1 # you can modify the timeout here
 i = 1
 vulnerable = False
 
@@ -51,7 +51,7 @@ def DnsDigger_list(file_path,domain): # list mode
     while line: # looping through the list line by line
         output = os.popen(f" dig +tries=1 +time={time_out} axfr {domain} @{line}").read()
         if "failed" in str(output): # error handling
-            print(f"[{t}]:{line}   :\033[31mnot vulnerable to zone-tranfer \033[0m \n")
+            print(f"[{t}]:{line}   :\033[31mnot vulnerable to zone-transfer \033[0m \n")
             line = target_list_file.readline().rstrip("\n\r")# striping any empty lines
             t += 1
         else:
@@ -81,7 +81,7 @@ def DnsDigger_Single(ip,domain):
     global vulnerable
     output = os.popen(f" dig +tries=1 +time={time_out} axfr {domain} @{str(ip)}").read() #command for zone-starnsfer
     if "failed" in str(output):
-        print(f"[{i}]:{str(ip)}   :\033[31mnot vulnerable to zone-tranfer \033[0m \n")
+        print(f"[{i}]:{str(ip)}   :\033[31mnot vulnerable to zone-transfer \033[0m \n")
     else:
         print(f"[{i}]:{str(ip)}   :\033[92m~~IS VULNERABLE~~ \033[0m \n")
         raw_path = (f"{staticPath}{str(ip)}" + ".txt")
